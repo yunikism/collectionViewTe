@@ -3,19 +3,29 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		46655C8970B8190982A9EB38 /* Pods_collectionViewTe.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C02E3252A5C7CD6724CF25A /* Pods_collectionViewTe.framework */; };
 		C0DF367127DED0EC003F7E28 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DF367027DED0EC003F7E28 /* AppDelegate.swift */; };
 		C0DF367327DED0EC003F7E28 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DF367227DED0EC003F7E28 /* SceneDelegate.swift */; };
 		C0DF367527DED0EC003F7E28 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DF367427DED0EC003F7E28 /* ViewController.swift */; };
 		C0DF367827DED0EC003F7E28 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C0DF367627DED0EC003F7E28 /* Main.storyboard */; };
 		C0DF367A27DED0ED003F7E28 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C0DF367927DED0ED003F7E28 /* Assets.xcassets */; };
 		C0DF367D27DED0ED003F7E28 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C0DF367B27DED0ED003F7E28 /* LaunchScreen.storyboard */; };
+		C0DF368527DED4A3003F7E28 /* TabCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DF368427DED4A3003F7E28 /* TabCollectionViewCell.swift */; };
+		C0DF368727DED4B0003F7E28 /* PageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DF368627DED4B0003F7E28 /* PageCollectionViewCell.swift */; };
+		C0DF368927E026AA003F7E28 /* ProductTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DF368827E026AA003F7E28 /* ProductTableViewCell.swift */; };
+		C0DF368B27E05182003F7E28 /* TabInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DF368A27E05182003F7E28 /* TabInfo.swift */; };
+		C0DF368D27E06EE7003F7E28 /* ProductInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DF368C27E06EE7003F7E28 /* ProductInfo.swift */; };
+		C0DF369027E17D8A003F7E28 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = C0DF368F27E17D8A003F7E28 /* Kingfisher */; };
+		C0DF369227E1B9D1003F7E28 /* ProductDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DF369127E1B9D1003F7E28 /* ProductDetailViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		6C02E3252A5C7CD6724CF25A /* Pods_collectionViewTe.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_collectionViewTe.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		75E0D6809B6F1A53647951A9 /* Pods-collectionViewTe.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-collectionViewTe.release.xcconfig"; path = "Target Support Files/Pods-collectionViewTe/Pods-collectionViewTe.release.xcconfig"; sourceTree = "<group>"; };
 		C0DF366D27DED0EC003F7E28 /* collectionViewTe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = collectionViewTe.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C0DF367027DED0EC003F7E28 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C0DF367227DED0EC003F7E28 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -24,6 +34,13 @@
 		C0DF367927DED0ED003F7E28 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C0DF367C27DED0ED003F7E28 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C0DF367E27DED0ED003F7E28 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C0DF368427DED4A3003F7E28 /* TabCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabCollectionViewCell.swift; sourceTree = "<group>"; };
+		C0DF368627DED4B0003F7E28 /* PageCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageCollectionViewCell.swift; sourceTree = "<group>"; };
+		C0DF368827E026AA003F7E28 /* ProductTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductTableViewCell.swift; sourceTree = "<group>"; };
+		C0DF368A27E05182003F7E28 /* TabInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabInfo.swift; sourceTree = "<group>"; };
+		C0DF368C27E06EE7003F7E28 /* ProductInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductInfo.swift; sourceTree = "<group>"; };
+		C0DF369127E1B9D1003F7E28 /* ProductDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDetailViewController.swift; sourceTree = "<group>"; };
+		F8A794F3799A55B1F91FD9AB /* Pods-collectionViewTe.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-collectionViewTe.debug.xcconfig"; path = "Target Support Files/Pods-collectionViewTe/Pods-collectionViewTe.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,17 +48,39 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C0DF369027E17D8A003F7E28 /* Kingfisher in Frameworks */,
+				46655C8970B8190982A9EB38 /* Pods_collectionViewTe.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4E2D8DC0CF84DD45B7B26075 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				6C02E3252A5C7CD6724CF25A /* Pods_collectionViewTe.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		64146997C8ED65354F7658E3 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				F8A794F3799A55B1F91FD9AB /* Pods-collectionViewTe.debug.xcconfig */,
+				75E0D6809B6F1A53647951A9 /* Pods-collectionViewTe.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		C0DF366427DED0EC003F7E28 = {
 			isa = PBXGroup;
 			children = (
 				C0DF366F27DED0EC003F7E28 /* collectionViewTe */,
 				C0DF366E27DED0EC003F7E28 /* Products */,
+				64146997C8ED65354F7658E3 /* Pods */,
+				4E2D8DC0CF84DD45B7B26075 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -63,6 +102,12 @@
 				C0DF367927DED0ED003F7E28 /* Assets.xcassets */,
 				C0DF367B27DED0ED003F7E28 /* LaunchScreen.storyboard */,
 				C0DF367E27DED0ED003F7E28 /* Info.plist */,
+				C0DF368427DED4A3003F7E28 /* TabCollectionViewCell.swift */,
+				C0DF368627DED4B0003F7E28 /* PageCollectionViewCell.swift */,
+				C0DF368827E026AA003F7E28 /* ProductTableViewCell.swift */,
+				C0DF368A27E05182003F7E28 /* TabInfo.swift */,
+				C0DF368C27E06EE7003F7E28 /* ProductInfo.swift */,
+				C0DF369127E1B9D1003F7E28 /* ProductDetailViewController.swift */,
 			);
 			path = collectionViewTe;
 			sourceTree = "<group>";
@@ -74,15 +119,20 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = C0DF368127DED0ED003F7E28 /* Build configuration list for PBXNativeTarget "collectionViewTe" */;
 			buildPhases = (
+				AFAB2B537534E3D535F39687 /* [CP] Check Pods Manifest.lock */,
 				C0DF366927DED0EC003F7E28 /* Sources */,
 				C0DF366A27DED0EC003F7E28 /* Frameworks */,
 				C0DF366B27DED0EC003F7E28 /* Resources */,
+				4B6F410E7813BF16305EAF3B /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
 			name = collectionViewTe;
+			packageProductDependencies = (
+				C0DF368F27E17D8A003F7E28 /* Kingfisher */,
+			);
 			productName = collectionViewTe;
 			productReference = C0DF366D27DED0EC003F7E28 /* collectionViewTe.app */;
 			productType = "com.apple.product-type.application";
@@ -110,6 +160,9 @@
 				Base,
 			);
 			mainGroup = C0DF366427DED0EC003F7E28;
+			packageReferences = (
+				C0DF368E27E17D8A003F7E28 /* XCRemoteSwiftPackageReference "Kingfisher.git" */,
+			);
 			productRefGroup = C0DF366E27DED0EC003F7E28 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -132,14 +185,62 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		4B6F410E7813BF16305EAF3B /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-collectionViewTe/Pods-collectionViewTe-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-collectionViewTe/Pods-collectionViewTe-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-collectionViewTe/Pods-collectionViewTe-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		AFAB2B537534E3D535F39687 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-collectionViewTe-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		C0DF366927DED0EC003F7E28 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C0DF368527DED4A3003F7E28 /* TabCollectionViewCell.swift in Sources */,
+				C0DF368D27E06EE7003F7E28 /* ProductInfo.swift in Sources */,
+				C0DF369227E1B9D1003F7E28 /* ProductDetailViewController.swift in Sources */,
 				C0DF367527DED0EC003F7E28 /* ViewController.swift in Sources */,
+				C0DF368727DED4B0003F7E28 /* PageCollectionViewCell.swift in Sources */,
 				C0DF367127DED0EC003F7E28 /* AppDelegate.swift in Sources */,
 				C0DF367327DED0EC003F7E28 /* SceneDelegate.swift in Sources */,
+				C0DF368B27E05182003F7E28 /* TabInfo.swift in Sources */,
+				C0DF368927E026AA003F7E28 /* ProductTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -283,6 +384,7 @@
 		};
 		C0DF368227DED0ED003F7E28 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F8A794F3799A55B1F91FD9AB /* Pods-collectionViewTe.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -301,6 +403,7 @@
 		};
 		C0DF368327DED0ED003F7E28 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 75E0D6809B6F1A53647951A9 /* Pods-collectionViewTe.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -339,6 +442,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		C0DF368E27E17D8A003F7E28 /* XCRemoteSwiftPackageReference "Kingfisher.git" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/onevcat/Kingfisher.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 7.2.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		C0DF368F27E17D8A003F7E28 /* Kingfisher */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C0DF368E27E17D8A003F7E28 /* XCRemoteSwiftPackageReference "Kingfisher.git" */;
+			productName = Kingfisher;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = C0DF366527DED0EC003F7E28 /* Project object */;
 }
