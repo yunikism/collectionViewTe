@@ -86,10 +86,10 @@
                                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                     <prototypes>
                                                         <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ProductTableViewCell" id="Mbz-t5-xct" customClass="ProductTableViewCell" customModule="collectionViewTe" customModuleProvider="target">
-                                                            <rect key="frame" x="0.0" y="24.333333969116211" width="389" height="243.66667175292969"/>
+                                                            <rect key="frame" x="0.0" y="24.333333969116211" width="389" height="243.33332824707031"/>
                                                             <autoresizingMask key="autoresizingMask"/>
                                                             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Mbz-t5-xct" id="jn6-Or-pOi">
-                                                                <rect key="frame" x="0.0" y="0.0" width="389" height="243.66667175292969"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="389" height="243.33332824707031"/>
                                                                 <autoresizingMask key="autoresizingMask"/>
                                                                 <subviews>
                                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="tKW-Qx-bsN">
@@ -99,13 +99,13 @@
                                                                         </constraints>
                                                                     </imageView>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="83e-VV-myb">
-                                                                        <rect key="frame" x="12" y="223.33333333333334" width="365" height="20.333333333333343"/>
+                                                                        <rect key="frame" x="12" y="223" width="365" height="20.333333333333343"/>
                                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                         <nil key="textColor"/>
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gdd-f2-6T0">
-                                                                        <rect key="frame" x="12" y="197" width="365" height="21.333333333333343"/>
+                                                                        <rect key="frame" x="12" y="197" width="365" height="21"/>
                                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                         <nil key="textColor"/>
                                                                         <nil key="highlightedColor"/>

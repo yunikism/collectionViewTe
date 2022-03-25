@@ -12,7 +12,7 @@ class PageCollectionViewCell: UICollectionViewCell {
     
     @IBOutlet weak var productTableView: UITableView!
     open var refreshControl : UIRefreshControl?
-
+    
     var productInfoDic : Dictionary<String , [ProductInfo]> = [:] {
         didSet{
             DispatchQueue.main.async {
@@ -30,14 +30,14 @@ class PageCollectionViewCell: UICollectionViewCell {
     var currentPageDic : Dictionary<String , Int> = [:]
     var cellHeights : [IndexPath:CGFloat] = [:]
     
-    var lastKnowContentOfsset : CGFloat = 0.0
+    var lastKnowContentOfssetDic : Dictionary<String , CGFloat>  = [:]
     
     
 
     override func awakeFromNib() {
          self.productTableView.delegate = self
          self.productTableView.dataSource = self
-         self.productTableView.reloadData()
+//         self.productTableView.reloadData()
          self.productTableView.refreshControl = UIRefreshControl()
     
         self.productTableView.refreshControl?.addTarget(self, action: #selector(handleRefresh(_:)), for: .valueChanged)
@@ -48,11 +48,13 @@ class PageCollectionViewCell: UICollectionViewCell {
         
         self.currentPageDic.updateValue(1, forKey: self.contentDiv)
         self.productInfoDic[self.contentDiv] = []
-        self.lastKnowContentOfsset = 0.0
+//        self.lastKnowContentOfsset = 0.0
         addProduct()
         
         self.productTableView.refreshControl?.endRefreshing()
     }
+    
+
 
 }
 
@@ -128,8 +130,16 @@ extension PageCollectionViewCell : UITableViewDelegate, UITableViewDataSource, U
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
 
         scrollView.bounces = scrollView.contentOffset.y <= 0
-
-        if(self.lastKnowContentOfsset <= 0 || self.lastKnowContentOfsset > scrollView.contentOffset.y){
+        
+        let contentOfsset = self.lastKnowContentOfssetDic[self.contentDiv] ?? 0
+        
+        self.lastKnowContentOfssetDic.updateValue(scrollView.contentOffset.y , forKey: self.contentDiv)
+        
+        if contentOfsset == 0 {
+            return
+        }
+        
+        if(contentOfsset <= 0 || contentOfsset > scrollView.contentOffset.y){
             //위로스크롤
             NotificationCenter.default.post(
                 name: NSNotification.Name("hiddenNaviBar")
@@ -137,7 +147,7 @@ extension PageCollectionViewCell : UITableViewDelegate, UITableViewDataSource, U
                 , userInfo: [
                     "barHiddenBool" : true
                 ])
-        } else if (self.lastKnowContentOfsset < scrollView.contentOffset.y){
+        } else if (contentOfsset < scrollView.contentOffset.y){
             //아래로스크롤
             NotificationCenter.default.post(
                 name: NSNotification.Name("hiddenNaviBar")
@@ -146,21 +156,25 @@ extension PageCollectionViewCell : UITableViewDelegate, UITableViewDataSource, U
                     "barHiddenBool" : false
                 ])
         }
-
-        self.lastKnowContentOfsset = scrollView.contentOffset.y
-
+        
     }
 
     //스크롤 튐 현상 방지
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        cellHeights[indexPath] = cell.frame.size.height
+        self.cellHeights[indexPath] = cell.frame.size.height
+//        print("1111111111111111111111111 : cell  : \(self.cellHeights[indexPath])")
+        
     }
 
     func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
-        return cellHeights[indexPath] ?? UITableView.automaticDimension
+//        return self.cellHeights[indexPath] ?? UITableView.automaticDimension
+//        print("222222222222222222222222 : indexPath : \(indexPath) ")
+        if let height = self.cellHeights[indexPath]{
+            return height
+        }
+        return UITableView.automaticDimension
     }
     //스크롤 튐 현상 방지 끝
-    
 }
 
 

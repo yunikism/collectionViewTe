@@ -72,7 +72,7 @@ class ViewController: UIViewController {
     
     
     //테이블뷰 스크롤시 네비게이션바 히든 여부
-    var barHidden : Bool = false
+    var barHidden : Bool = true
     @objc private func hiddenNaviBar(_ notification : Notification){
 
         guard let bool : Bool = notification.userInfo?["barHiddenBool"] as? Bool else {return}
@@ -111,12 +111,16 @@ class ViewController: UIViewController {
         flowLayout.minimumLineSpacing = 0
 //        flowLayout.minimumInteritemSpacing = 0
         
-        flowLayout.estimatedItemSize = CGSize(width:  self.pageCollectionView.frame.width, height:  self.pageCollectionView.frame.height + 50)
+//        flowLayout.estimatedItemSize = CGSize(width:  self.pageCollectionView.frame.width, height:  self.pageCollectionView.frame.height + 50)
         
+        flowLayout.estimatedItemSize = CGSize(width:  self.pageCollectionView.frame.width, height:  self.pageCollectionView.frame.height + 50)
 //        flowLayout.itemSize = CGSize(width:  self.pageCollectionView.frame.width, height:  self.pageCollectionView.frame.height + 50)
         
-        self.pageCollectionView.collectionViewLayout = flowLayout
+//        flowLayout.itemSize = UICollectionViewFlowLayout.automaticSize
         
+//        flowLayout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
+        
+        self.pageCollectionView.collectionViewLayout = flowLayout
 
     }
     
@@ -134,6 +138,7 @@ class ViewController: UIViewController {
         UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
         
     }
+    
     
 }
 
@@ -174,7 +179,7 @@ extension ViewController : UICollectionViewDelegate, UICollectionViewDataSource{
                 return UICollectionViewCell()
             }
 
-            print("indexPath : \(indexPath) /////// \(intdd)")
+//            print("indexPath : \(indexPath) /////// \(intdd)")
             cell.indexCell = indexPath
             cell.tabInfoArr = self.tabInfoArr
             cell.productInfoDic = self.productInfoDic
@@ -201,11 +206,9 @@ extension ViewController : UICollectionViewDelegate, UICollectionViewDataSource{
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        
-        
 
         if Int(scrollView.contentOffset.x / pageCollectionView.frame.width) == 9 {
-            print("앙 도착띠")
+
         }
         
     }
@@ -218,14 +221,6 @@ extension ViewController : UICollectionViewDelegate, UICollectionViewDataSource{
             
             let index = Int(targetContentOffset.pointee.x / pageCollectionView.frame.width)
             let indexPath = IndexPath(item: index, section: 0)
-            
-            print("roll~ index : \(indexPath)")
-            
-            if indexPath.row == 9{
-                
-            } else {
-               
-            }
             
             self.tabCollectionView.selectItem(at: indexPath, animated: true, scrollPosition: .bottom)
             self.tabCollectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
@@ -425,8 +420,8 @@ extension ViewController : GADBannerViewDelegate {
                bannerView.heightAnchor.constraint(equalToConstant: height)
            ])
 
-//           bannerView.adUnitID = "ca-app-pub-6056528810711682/3296571971"
-           bannerView.adUnitID = "ca-app-pub-3940256099942544/2934735716" //test
+           bannerView.adUnitID = "ca-app-pub-6056528810711682/3296571971"
+//           bannerView.adUnitID = "ca-app-pub-3940256099942544/2934735716" //test
            bannerView.rootViewController = self
            bannerView.load(GADRequest())
            bannerView.delegate = self
