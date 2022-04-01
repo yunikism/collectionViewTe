@@ -11,7 +11,7 @@ class RecentSearchTableViewCell: UITableViewCell {
 
     @IBOutlet weak var recentSearchLabel: UILabel!
     @IBOutlet weak var deleteBtn: UIButton!
-    
+    @IBOutlet weak var deleteAllBtn: UIButton!
     
     override func awakeFromNib() {
         super.awakeFromNib()
