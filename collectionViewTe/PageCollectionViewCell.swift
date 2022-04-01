@@ -18,6 +18,7 @@ class PageCollectionViewCell: UICollectionViewCell {
             DispatchQueue.main.async {
                 self.productTableView.reloadData()
             }
+            
         }
     }
     
@@ -115,10 +116,10 @@ extension PageCollectionViewCell : UITableViewDelegate, UITableViewDataSource, U
         if (scrollView.contentOffset.y + 1) >= (scrollView.contentSize.height - scrollView.frame.size.height) {
 
             if let currentPage = self.currentPageDic[self.contentDiv] {
-            print("currentPage : \(currentPage)")
+//            print("currentPage : \(currentPage)")
                 self.currentPageDic.updateValue(currentPage + 1, forKey: self.contentDiv)
             } else {
-            print("else!")
+//            print("else!")
                 self.currentPageDic.updateValue(2, forKey: self.contentDiv)
             }
             addProduct()
@@ -244,7 +245,7 @@ extension PageCollectionViewCell {
                     self.productInfoDic[self.contentDiv]? += productInfoArr
                     
 //                    print ("productInfoDic : \(self.productInfoDic[self.contentDiv])")
-                    print("self.contentDiv : \(self.contentDiv)  ///////// self.current_page : \(currentPage)" )
+//                    print("self.contentDiv : \(self.contentDiv)  ///////// self.current_page : \(currentPage)" )
                     
 
 //                    DispatchQueue.main.async {

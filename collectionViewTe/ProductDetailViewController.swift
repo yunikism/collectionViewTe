@@ -16,6 +16,9 @@ class ProductDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.title = "TV요리레시피"
+        self.navigationController?.navigationBar.topItem?.title=""
+        
         let url = URL(string: link_url)
         let request = URLRequest(url: url!)
         productWebView.configuration.preferences.javaScriptEnabled = true

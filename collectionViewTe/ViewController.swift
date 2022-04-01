@@ -7,6 +7,7 @@
 
 import UIKit
 import GoogleMobileAds
+import Alamofire
 
 class ViewController: UIViewController {
 
@@ -14,12 +15,13 @@ class ViewController: UIViewController {
     @IBOutlet weak var tabCollectionView: UICollectionView!
     @IBOutlet weak var pageCollectionView: UICollectionView!
     @IBOutlet weak var highlightView: UIView!
-    
+    @IBOutlet weak var searchButton: UIButton!
     
 //    var tabArray : [String] = []
     var tabInfoArr : [TabInfo] = []
 //    var productInfoArr : [ProductInfo] = []
     
+//    var productInfoDic : Dictionary<String , ProductInformation> = [:]
     var productInfoDic : Dictionary<String , [ProductInfo]> = [:]
     
     var constraints :  [NSLayoutConstraint] = []
@@ -48,6 +50,18 @@ class ViewController: UIViewController {
         self.pageCollectionView.delegate = self
         self.pageCollectionView.dataSource = self
         self.pageCollectionView.isPagingEnabled = true
+        
+        //네비게이션바
+        let navigationBarAppearance = UINavigationBarAppearance()
+        navigationBarAppearance.backgroundColor = .orange
+        navigationBarAppearance.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
+        self.navigationController?.navigationBar.standardAppearance = navigationBarAppearance
+        self.navigationController?.navigationBar.scrollEdgeAppearance = navigationBarAppearance
+        self.navigationController?.navigationBar.tintColor = .white
+        
+        self.view.backgroundColor = UIColor.orange
+        
+        self.searchButton.layer.cornerRadius = 10
         
 //        self.navigationController?.hidesBarsOnSwipe = true
         
@@ -138,6 +152,7 @@ class ViewController: UIViewController {
         UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
         
     }
+
     
     
 }
@@ -248,75 +263,80 @@ extension ViewController {
     //상단 탭바 불러오기
     private func apiScriptInfo(){
         print("----script api start-----")
+
         guard let url:URL = URL(string: "https://rprecipe.com/api/check/getScriptInfo") else { return }
         
-        let task = URLSession.shared.dataTask(with: url){ [self] (data, response, error) in
-
-            if let dataJson = data {
-                do{
-                    let json = try JSONSerialization.jsonObject(with: dataJson, options: []) as! Dictionary<String,Any>
+        AF.request(url, method: .get, parameters: nil)
+            .responseData(completionHandler: { response in
+                switch response.result{
+                case let .success(data):
                     
+                    do{
+                    let json = try JSONSerialization.jsonObject(with: data, options: []) as! Dictionary<String,Any>
                     let scriptInfo = json["data"] as! Dictionary<String,Any>
-                    
                     let catelistString = scriptInfo["catelist"] as! String
-                        
                     let cateList = try JSONSerialization.jsonObject(with: Data(catelistString.utf8), options: []) as! Array<Dictionary<String,Any>>
-                    
                     self.tabInfoArr.append(TabInfo(code_name: "홈", code_id: "000"))
+                    
                     for(_, v) in cateList.enumerated() {
-                        
+
                             guard let code_name = v["code_name"] as? String else {return}
                             guard let code_id = v["code_id"] as? String else {return}
-                            
+
                             let scInfo = TabInfo(code_name: code_name, code_id: code_id)
                             self.tabInfoArr.append(scInfo)
-                        
                     }
-                    DispatchQueue.main.async {
+                    
                         self.tabCollectionView.reloadData()//main
-//                        self.pageCollectionView.reloadData()
                         let firstIndex = IndexPath(item: 0, section: 0)
                         self.tabCollectionView.selectItem(at: firstIndex, animated: false, scrollPosition: .right)
-                        apiListCall()
+                        self.apiListCall()
+                    }catch{
+                        
                     }
+                case let .failure(error):
+                    print("fali")
                 }
-                catch{}
-            }
-        }
-        task.resume()
+                
+            })
+        
+        
+        
         print("----script api End-----")
     }
     
+
+
     
     //상품 리스트 초기 셋팅
     private func apiListCall() {
-        
+
         print("----product list api start-----")
-        
+
         for tabInfo in tabInfoArr {
-            
+
             let contentDivCd = tabInfo.code_id
             let url : URL
-            
+
             if contentDivCd == "000" {
                 url = URL(string: "https://rprecipe.com/api/content/selectContentList?current_page=1&appVer=11")!
             }else{
                 url = URL(string: "https://rprecipe.com/api/content/selectContentList?current_page=1&appVer=11&contentDivCd=\(contentDivCd)")!
             }
-            
+
               let task = URLSession.shared.dataTask(with: url){ [self] (data, response, error) in
-      
+
                   if let dataJson = data {
                       do{
                           let json = try JSONSerialization.jsonObject(with: dataJson, options: []) as! Dictionary<String,Any>
-            
+
                           let productArray = json["data"] as! Array<Dictionary<String,Any>>
-            
+
 //                          print(json)
                           var productInfoArr : [ProductInfo] = []
-            
+
                           for productInfo in productArray {
-                  
+
 //                          let productInfo = json["data"] as! Dictionary<String,Any>/
                               guard let content_no = productInfo["content_no"] as? Int else {return}
                               guard let sub_title = productInfo["sub_title"] as? String else {return}
@@ -331,8 +351,8 @@ extension ViewController {
                               guard let best_order = productInfo["best_order"] as? Int else {return}
                               guard let hit_cnt = productInfo["hit_cnt"] as? Int else {return}
                               guard let link_url = productInfo["link_url"] as? String else {return}
-                  
-      
+
+
                               let pI : ProductInfo = ProductInfo(
                                   content_no: content_no
                                   , sub_title: sub_title
@@ -348,12 +368,12 @@ extension ViewController {
                                   , hit_cnt: hit_cnt
                                   , link_url: link_url
                               )
-                  
+
                               productInfoArr.append(pI)
                           }
-                  
+
                           productInfoDic.updateValue(productInfoArr, forKey: contentDivCd)
-                        
+
 //                        print("contentDivCd : \(contentDivCd) \(tabInfo.code_name) ......\(productInfoDic[contentDivCd]?[0].title)")
                           DispatchQueue.main.async {
                             self.pageCollectionView.reloadData()
@@ -364,7 +384,7 @@ extension ViewController {
               }
         task.resume()
         }
-        
+
         print("----product list script api End-----")
     }
     

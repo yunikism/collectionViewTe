@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		46655C8970B8190982A9EB38 /* Pods_collectionViewTe.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C02E3252A5C7CD6724CF25A /* Pods_collectionViewTe.framework */; };
+		C0714DF127F153B700158AC4 /* ProductDetailInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0714DF027F153B700158AC4 /* ProductDetailInfo.swift */; };
+		C0BEA72727F5BD3B0092DE1C /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0BEA72627F5BD3B0092DE1C /* SearchViewController.swift */; };
+		C0BEA72927F693DB0092DE1C /* RecentSearchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0BEA72827F693DB0092DE1C /* RecentSearchTableViewCell.swift */; };
 		C0DF367127DED0EC003F7E28 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DF367027DED0EC003F7E28 /* AppDelegate.swift */; };
 		C0DF367327DED0EC003F7E28 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DF367227DED0EC003F7E28 /* SceneDelegate.swift */; };
 		C0DF367527DED0EC003F7E28 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DF367427DED0EC003F7E28 /* ViewController.swift */; };
@@ -26,6 +29,9 @@
 /* Begin PBXFileReference section */
 		6C02E3252A5C7CD6724CF25A /* Pods_collectionViewTe.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_collectionViewTe.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		75E0D6809B6F1A53647951A9 /* Pods-collectionViewTe.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-collectionViewTe.release.xcconfig"; path = "Target Support Files/Pods-collectionViewTe/Pods-collectionViewTe.release.xcconfig"; sourceTree = "<group>"; };
+		C0714DF027F153B700158AC4 /* ProductDetailInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDetailInfo.swift; sourceTree = "<group>"; };
+		C0BEA72627F5BD3B0092DE1C /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
+		C0BEA72827F693DB0092DE1C /* RecentSearchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentSearchTableViewCell.swift; sourceTree = "<group>"; };
 		C0DF366D27DED0EC003F7E28 /* collectionViewTe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = collectionViewTe.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C0DF367027DED0EC003F7E28 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C0DF367227DED0EC003F7E28 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -70,7 +76,6 @@
 				F8A794F3799A55B1F91FD9AB /* Pods-collectionViewTe.debug.xcconfig */,
 				75E0D6809B6F1A53647951A9 /* Pods-collectionViewTe.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -108,6 +113,9 @@
 				C0DF368A27E05182003F7E28 /* TabInfo.swift */,
 				C0DF368C27E06EE7003F7E28 /* ProductInfo.swift */,
 				C0DF369127E1B9D1003F7E28 /* ProductDetailViewController.swift */,
+				C0714DF027F153B700158AC4 /* ProductDetailInfo.swift */,
+				C0BEA72627F5BD3B0092DE1C /* SearchViewController.swift */,
+				C0BEA72827F693DB0092DE1C /* RecentSearchTableViewCell.swift */,
 			);
 			path = collectionViewTe;
 			sourceTree = "<group>";
@@ -161,7 +169,7 @@
 			);
 			mainGroup = C0DF366427DED0EC003F7E28;
 			packageReferences = (
-				C0DF368E27E17D8A003F7E28 /* XCRemoteSwiftPackageReference "Kingfisher.git" */,
+				C0DF368E27E17D8A003F7E28 /* XCRemoteSwiftPackageReference "Kingfisher" */,
 			);
 			productRefGroup = C0DF366E27DED0EC003F7E28 /* Products */;
 			projectDirPath = "";
@@ -233,13 +241,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				C0DF368527DED4A3003F7E28 /* TabCollectionViewCell.swift in Sources */,
+				C0BEA72727F5BD3B0092DE1C /* SearchViewController.swift in Sources */,
 				C0DF368D27E06EE7003F7E28 /* ProductInfo.swift in Sources */,
 				C0DF369227E1B9D1003F7E28 /* ProductDetailViewController.swift in Sources */,
 				C0DF367527DED0EC003F7E28 /* ViewController.swift in Sources */,
 				C0DF368727DED4B0003F7E28 /* PageCollectionViewCell.swift in Sources */,
 				C0DF367127DED0EC003F7E28 /* AppDelegate.swift in Sources */,
 				C0DF367327DED0EC003F7E28 /* SceneDelegate.swift in Sources */,
+				C0BEA72927F693DB0092DE1C /* RecentSearchTableViewCell.swift in Sources */,
 				C0DF368B27E05182003F7E28 /* TabInfo.swift in Sources */,
+				C0714DF127F153B700158AC4 /* ProductDetailInfo.swift in Sources */,
 				C0DF368927E026AA003F7E28 /* ProductTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -444,7 +455,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		C0DF368E27E17D8A003F7E28 /* XCRemoteSwiftPackageReference "Kingfisher.git" */ = {
+		C0DF368E27E17D8A003F7E28 /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/onevcat/Kingfisher.git";
 			requirement = {
@@ -457,7 +468,7 @@
 /* Begin XCSwiftPackageProductDependency section */
 		C0DF368F27E17D8A003F7E28 /* Kingfisher */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = C0DF368E27E17D8A003F7E28 /* XCRemoteSwiftPackageReference "Kingfisher.git" */;
+			package = C0DF368E27E17D8A003F7E28 /* XCRemoteSwiftPackageReference "Kingfisher" */;
 			productName = Kingfisher;
 		};
 /* End XCSwiftPackageProductDependency section */
