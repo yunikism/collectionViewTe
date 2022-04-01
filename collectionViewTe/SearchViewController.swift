@@ -40,6 +40,7 @@ class SearchViewController: UIViewController ,UITextFieldDelegate{
     
     override func viewDidAppear(_ animated: Bool) {
         self.searchTextField.becomeFirstResponder()
+        self.recentSearchTableView.isHidden = false
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -71,6 +72,7 @@ class SearchViewController: UIViewController ,UITextFieldDelegate{
         print(self.recentSearchArr)
         UserDefaults.standard.set(self.recentSearchArr, forKey: "recentSearch")
         self.recentSearchTableView.isHidden = true
+        self.searchProductTableView.isHidden = false
         
         apiListCall(searchStr)
     }
