@@ -134,6 +134,12 @@ extension PageCollectionViewCell : UITableViewDelegate, UITableViewDataSource, U
         
         let contentOfsset = self.lastKnowContentOfssetDic[self.contentDiv] ?? 0
         
+        if contentOfsset > scrollView.contentOffset.y {
+            if (contentOfsset - scrollView.contentOffset.y) < 30 {return}
+        } else{
+            if (scrollView.contentOffset.y - contentOfsset) < 30 {return}
+        }
+        
         self.lastKnowContentOfssetDic.updateValue(scrollView.contentOffset.y , forKey: self.contentDiv)
         
         if contentOfsset == 0 {

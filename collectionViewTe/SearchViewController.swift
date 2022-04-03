@@ -18,7 +18,7 @@ class SearchViewController: UIViewController ,UITextFieldDelegate{
     var recentSearchArr : [String] = []
     var searchText : String = ""
     var productInfoArr : [ProductInfo] = []
-    
+    var lastKnowContentOfsset : CGFloat = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,6 +36,41 @@ class SearchViewController: UIViewController ,UITextFieldDelegate{
         self.searchTextField.delegate = self
         
         self.searchTextField.addTarget(self, action: #selector(tapSearchTextField(_:)), for: .touchDown)
+  
+        statusBarStyle()
+    }
+    
+//    override func viewWillAppear(_ animated: Bool) {
+//        super.viewWillAppear(animated)
+//        setNeedsStatusBarAppearanceUpdate()
+//    }
+//    override var preferredStatusBarStyle: UIStatusBarStyle {
+//        .lightContent
+//    }
+    
+    private func statusBarStyle(){
+        if #available(iOS 13.0, *) {
+            let app = UIApplication.shared
+            let statusBarHeight: CGFloat = app.statusBarFrame.size.height
+            
+            let statusbarView = UIView()
+            statusbarView.backgroundColor = UIColor.orange
+            view.addSubview(statusbarView)
+          
+            statusbarView.translatesAutoresizingMaskIntoConstraints = false
+            statusbarView.heightAnchor
+                .constraint(equalToConstant: statusBarHeight).isActive = true
+            statusbarView.widthAnchor
+                .constraint(equalTo: view.widthAnchor, multiplier: 1.0).isActive = true
+            statusbarView.topAnchor
+                .constraint(equalTo: view.topAnchor).isActive = true
+            statusbarView.centerXAnchor
+                .constraint(equalTo: view.centerXAnchor).isActive = true
+          
+        } else {
+            let statusBar = UIApplication.shared.value(forKeyPath: "statusBarWindow.statusBar") as? UIView
+            statusBar?.backgroundColor = UIColor.orange
+        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -74,6 +109,8 @@ class SearchViewController: UIViewController ,UITextFieldDelegate{
         self.recentSearchTableView.isHidden = true
         self.searchProductTableView.isHidden = false
         
+        productInfoArr.removeAll()
+        self.lastKnowContentOfsset = 0
         apiListCall(searchStr)
     }
     
@@ -119,7 +156,10 @@ class SearchViewController: UIViewController ,UITextFieldDelegate{
 
         print("----product list api start----- \(searchStr)")
 
-        guard let url:URL = URL(string: "https://rprecipe.com/api/content/selectContentList?current_page=1&appVer=11&title=") else {return}
+        let urlStr = "https://rprecipe.com/api/content/selectContentList?current_page=1&appVer=11&title=\(searchStr)"
+        let encodedString = urlStr.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
+        
+        guard let url:URL = URL(string: encodedString) else {return}
 
 //        guard let url:URL = URL(string: "https://rprecipe.com/api/check/getScriptInfo") else { return }
         
@@ -174,7 +214,6 @@ class SearchViewController: UIViewController ,UITextFieldDelegate{
 
                           DispatchQueue.main.async {
                             self.searchProductTableView.reloadData()
-                              
                           }
                       }
                       catch{}
@@ -213,6 +252,8 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource{
                 cell.deleteBtn.isHidden = true
                 cell.deleteAllBtn.isHidden = false
                 
+                cell.selectionStyle = .none
+                
                 return cell
                 
             } else{
@@ -250,5 +291,53 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
        
+        guard indexPath.row != 0 else {return}
+//        print(indexPath.row)
+        
+        let cell = tableView.cellForRow(at: indexPath) as? RecentSearchTableViewCell
+        guard let cellLabel = cell?.recentSearchLabel.text else {return}
+        
+        self.searchTextField.text = cellLabel
+        tapSearchButton(self.searchButton)
+        
     }
+    
+    //스크롤 감지하기
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+
+        scrollView.bounces = scrollView.contentOffset.y <= 0
+        
+        let contentOfsset = self.lastKnowContentOfsset
+        
+        if contentOfsset > scrollView.contentOffset.y {
+            if (contentOfsset - scrollView.contentOffset.y) < 30 {return}
+        } else{
+            if (scrollView.contentOffset.y - contentOfsset) < 30 {return}
+        }
+        self.lastKnowContentOfsset = scrollView.contentOffset.y
+        
+        if contentOfsset == 0 {
+            return
+        }
+        
+        if(contentOfsset <= 0 || contentOfsset > scrollView.contentOffset.y){
+            //위로스크롤
+            NotificationCenter.default.post(
+                name: NSNotification.Name("hiddenNaviBar")
+                , object: nil
+                , userInfo: [
+                    "barHiddenBool" : true
+                ])
+        } else if (contentOfsset < scrollView.contentOffset.y){
+            //아래로스크롤
+            NotificationCenter.default.post(
+                name: NSNotification.Name("hiddenNaviBar")
+                , object: nil
+                , userInfo: [
+                    "barHiddenBool" : false
+                ])
+        }
+        
+    }
+    
 }
