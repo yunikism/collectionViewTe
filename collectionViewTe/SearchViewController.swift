@@ -39,14 +39,7 @@ class SearchViewController: UIViewController ,UITextFieldDelegate{
   
         statusBarStyle()
     }
-    
-//    override func viewWillAppear(_ animated: Bool) {
-//        super.viewWillAppear(animated)
-//        setNeedsStatusBarAppearanceUpdate()
-//    }
-//    override var preferredStatusBarStyle: UIStatusBarStyle {
-//        .lightContent
-//    }
+
     
     private func statusBarStyle(){
         if #available(iOS 13.0, *) {
@@ -54,7 +47,7 @@ class SearchViewController: UIViewController ,UITextFieldDelegate{
             let statusBarHeight: CGFloat = app.statusBarFrame.size.height
             
             let statusbarView = UIView()
-            statusbarView.backgroundColor = UIColor.orange
+            statusbarView.backgroundColor = UIColor.primary
             view.addSubview(statusbarView)
           
             statusbarView.translatesAutoresizingMaskIntoConstraints = false
@@ -69,7 +62,7 @@ class SearchViewController: UIViewController ,UITextFieldDelegate{
           
         } else {
             let statusBar = UIApplication.shared.value(forKeyPath: "statusBarWindow.statusBar") as? UIView
-            statusBar?.backgroundColor = UIColor.orange
+            statusBar?.backgroundColor = UIColor.primary
         }
     }
     
@@ -89,28 +82,35 @@ class SearchViewController: UIViewController ,UITextFieldDelegate{
         
         guard let searchStr = searchTextField.text else { return }
         
-        guard self.searchText != searchStr else { return }
+//        guard self.searchText != searchStr else { return }
         guard searchStr != "" else { return }
+        guard let lastStr = self.recentSearchArr.last else {return}
         
-        self.searchText = searchStr
+//        print()
         
-        if self.recentSearchArr.count >= 5 {
-            self.recentSearchArr.remove(at: 0)
-            self.recentSearchArr.append(searchStr)
-        } else {
-            self.recentSearchArr.append(searchStr)
+        if lastStr != searchStr {
+            if self.recentSearchArr.count >= 5 {
+                self.recentSearchArr.remove(at: 0)
+                self.recentSearchArr.append(searchStr)
+            } else {
+                self.recentSearchArr.append(searchStr)
+            }
+            UserDefaults.standard.set(self.recentSearchArr, forKey: "recentSearch")
         }
+        
         
         self.searchTextField.resignFirstResponder()
         self.recentSearchTableView.reloadData()
     
-        print(self.recentSearchArr)
-        UserDefaults.standard.set(self.recentSearchArr, forKey: "recentSearch")
+//        print(self.recentSearchArr)
+        
         self.recentSearchTableView.isHidden = true
         self.searchProductTableView.isHidden = false
         
         productInfoArr.removeAll()
         self.lastKnowContentOfsset = 0
+        
+        self.searchText = searchStr
         apiListCall(searchStr)
     }
     
@@ -136,11 +136,12 @@ class SearchViewController: UIViewController ,UITextFieldDelegate{
     }
     
     
-    //검색기록 전체삭제 클릭
+    //searchTextField 클릭
     @objc func tapSearchTextField(_ sender: UIButton){
+//        self.searchProductTableView.isHidden = true
         self.recentSearchTableView.isHidden = false
     }
-    
+
 
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
@@ -305,7 +306,7 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource{
     //스크롤 감지하기
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
 
-        scrollView.bounces = scrollView.contentOffset.y <= 0
+//        scrollView.bounces = scrollView.contentOffset.y <= 0
         
         let contentOfsset = self.lastKnowContentOfsset
         

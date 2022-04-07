@@ -169,13 +169,11 @@ extension PageCollectionViewCell : UITableViewDelegate, UITableViewDataSource, U
     //스크롤 튐 현상 방지
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         self.cellHeights[indexPath] = cell.frame.size.height
-//        print("1111111111111111111111111 : cell  : \(self.cellHeights[indexPath])")
         
     }
 
     func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
-//        return self.cellHeights[indexPath] ?? UITableView.automaticDimension
-//        print("222222222222222222222222 : indexPath : \(indexPath) ")
+
         if let height = self.cellHeights[indexPath]{
             return height
         }

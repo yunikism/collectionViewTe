@@ -8,6 +8,9 @@
 import UIKit
 import GoogleMobileAds
 import Alamofire
+import KakaoSDKUser
+import KakaoSDKAuth
+import KakaoSDKCommon
 
 class ViewController: UIViewController {
 
@@ -33,6 +36,8 @@ class ViewController: UIViewController {
     
     var intdd : Int = 0
     
+    var memberInfo : MemberInfo?
+    
     //google ad
     public lazy var bannerView: GADBannerView = {
         let banner = GADBannerView(frame: CGRect(x: 0, y: 0, width: 40, height: 40))
@@ -44,6 +49,12 @@ class ViewController: UIViewController {
         
         apiScriptInfo()
         
+        if let userDefaultMemberInfo = UserDefaults.standard.object(forKey: "MemberInfo") as? MemberInfo {
+            self.memberInfo = userDefaultMemberInfo
+        }
+        print("dsfsfsdfsd : \(self.memberInfo)")
+        
+        
         self.tabCollectionView.delegate = self
         self.tabCollectionView.dataSource = self
         
@@ -53,13 +64,13 @@ class ViewController: UIViewController {
         
         //네비게이션바
         let navigationBarAppearance = UINavigationBarAppearance()
-        navigationBarAppearance.backgroundColor = .orange
+        navigationBarAppearance.backgroundColor = .primary
         navigationBarAppearance.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
         self.navigationController?.navigationBar.standardAppearance = navigationBarAppearance
         self.navigationController?.navigationBar.scrollEdgeAppearance = navigationBarAppearance
         self.navigationController?.navigationBar.tintColor = .white
         
-        self.view.backgroundColor = UIColor.orange
+        self.view.backgroundColor = UIColor.primary
         
         self.searchButton.layer.cornerRadius = 10
         
@@ -80,6 +91,14 @@ class ViewController: UIViewController {
             , selector: #selector(hiddenNaviBar(_:))
             , name: NSNotification.Name("hiddenNaviBar")
             , object: nil)
+        
+//        
+//        NotificationCenter.default.addObserver(
+//            self
+//            , selector: #selector(kakaoLoginCheck(_:))
+//            , name: NSNotification.Name("kakaoLoginCheck")
+//            , object: nil)
+//        
 
     }
     
@@ -153,6 +172,11 @@ class ViewController: UIViewController {
         
     }
 
+
+//    @objc func kakaoLoginCheck(_ notification : Notification) -> Bool{
+//
+//
+//    }
     
     
 }
@@ -295,7 +319,7 @@ extension ViewController {
                         
                     }
                 case let .failure(error):
-                    print("fali")
+                    print(error)
                 }
                 
             })
@@ -455,3 +479,12 @@ extension ViewController : GADBannerViewDelegate {
     }
     
 }
+
+
+
+
+extension UIColor {
+    class var primary: UIColor? { return UIColor(named: "primaryColor") }
+}
+
+
