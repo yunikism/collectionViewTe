@@ -10,6 +10,8 @@ import GoogleMobileAds
 import KakaoSDKCommon
 import KakaoSDKAuth
 import KakaoSDKUser
+import Firebase
+
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -22,6 +24,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
 //        KakaoSDKCommon.initSDK(appKey: "09354fdddc2334d79c2a730180885f0e")
         KakaoSDK.initSDK(appKey: "09354fdddc2334d79c2a730180885f0e")
+        FirebaseApp.configure()
         
         return true
     }

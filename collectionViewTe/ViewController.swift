@@ -48,6 +48,7 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         
         apiScriptInfo()
+        notificationConsent()
         
         if let userDefaultMemberInfo = UserDefaults.standard.object(forKey: "MemberInfo") as? MemberInfo {
             self.memberInfo = userDefaultMemberInfo
@@ -91,17 +92,21 @@ class ViewController: UIViewController {
             , selector: #selector(hiddenNaviBar(_:))
             , name: NSNotification.Name("hiddenNaviBar")
             , object: nil)
-        
-//        
-//        NotificationCenter.default.addObserver(
-//            self
-//            , selector: #selector(kakaoLoginCheck(_:))
-//            , name: NSNotification.Name("kakaoLoginCheck")
-//            , object: nil)
-//        
+              
 
     }
     
+    func notificationConsent(){
+        let center = UNUserNotificationCenter.current()
+        center.requestAuthorization(options: [.alert, .sound, .badge]) { granted, error in
+            
+            if let error = error {
+                // Handle the error here.
+            }
+            
+            // Enable or disable features based on the authorization.
+        }
+    }
     
     
     //테이블뷰 스크롤시 네비게이션바 히든 여부
@@ -160,6 +165,7 @@ class ViewController: UIViewController {
  
     @IBAction func pushTest(_ sender: UIBarButtonItem) {
         
+        print("pushtest")
         let push = UNMutableNotificationContent()
         push.title = "test Title"
         push.subtitle = "test subTitle"

@@ -16,7 +16,8 @@ import MapKit
 class SettingViewController: UIViewController {
 
     @IBOutlet weak var settingTableView: UITableView!
-    
+    var member_no : String = ""
+    var loginSuccess = false
 //    let memberInfo : MemberInfo()
     
     override func viewDidLoad() {
@@ -25,19 +26,64 @@ class SettingViewController: UIViewController {
         self.navigationController?.navigationBar.topItem?.title=""
         self.settingTableView.delegate = self
         self.settingTableView.dataSource = self
- 
+        
+        
+        NotificationCenter.default.addObserver(
+            self
+            , selector: #selector(kakaoLoginSuccessToast(_:))
+            , name: NSNotification.Name("kakaoLoginSuccessToast")
+            , object: nil)
+        
     }
     
     
+    
+    override func viewWillAppear(_ animated: Bool) {
+        
+        print("Setting~!~! viewWillAppear")
+        if let member_no = UserDefaults.standard.string(forKey: "member_no"){
+            self.member_no = member_no
+        }else {
+            self.member_no = ""
+        }
+        self.settingTableView.reloadData()
+        if self.loginSuccess{
+            showToast(message: "로그인 되었습니다", font: .systemFont(ofSize: 14.0))
+        }
+        self.loginSuccess = false
+    }
+    
+    
+    @objc private func kakaoLoginSuccessToast(_ notification : Notification){
+        self.loginSuccess = true
+//        showToast(message: "로그인 되었습니다", font: .systemFont(ofSize: 14.0))
+    }
+    
     func kakaoLogout() {
+        let alert = UIAlertController(title: "알림", message: "로그아웃 하시겠습니까?", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "확인", style: .default) {[weak self] action in
         UserApi.shared.logout {(error) in
             if let error = error {
+//                UserDefaults.standard.removeObject(forKey: "member_no")
+//                self?.member_no = ""
+//                self?.settingTableView.reloadData()
+//                self?.showToast(message: "로그아웃 되었습니다", font: .systemFont(ofSize: 12.0))
                 print(error)
             }
             else {
-                print("logout() success.")
+                UserDefaults.standard.removeObject(forKey: "member_no")
+                self?.member_no = ""
+//                print("logout() success.")
+                self?.settingTableView.reloadData()
+                self?.showToast(message: "로그아웃 되었습니다", font: .systemFont(ofSize: 14.0))
             }
         }
+        })
+        alert.addAction(UIAlertAction(title: "취소", style: .default) { action in
+            return
+        })
+        present(alert, animated: true, completion: nil)
+        
     }
     
     func kakaoTokenExistence(){
@@ -131,7 +177,7 @@ class SettingViewController: UIViewController {
 
 extension SettingViewController : UITableViewDelegate , UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 4
+        return 1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -142,19 +188,20 @@ extension SettingViewController : UITableViewDelegate , UITableViewDataSource {
 //        let member_no = memberInfo.member_no
         
         if indexPath.row == 0 {
-//            if member_no == nil{
-                cell.textLabel?.text = "로그아웃"
-//            }else {
-                cell.textLabel?.text = "로그인"
-//            }
-            
-        }else if indexPath.row == 1 {
-            cell.textLabel?.text = "로그인 check!"
-        }else if indexPath.row == 2 {
-            cell.textLabel?.text = "로그아웃!"
-        }else if indexPath.row == 3 {
-            cell.textLabel?.text = "로그인 정보"
+            print("self.member_no : \(self.member_no)")
+            if self.member_no == ""{
+                cell.textLabel?.text = "로그인!@!@"
+            }else {
+                cell.textLabel?.text = "로그아웃!@!@"
+            }
         }
+//        else if indexPath.row == 1 {
+//            cell.textLabel?.text = "로그인 check!"
+//        }else if indexPath.row == 2 {
+//            cell.textLabel?.text = "로그아웃!"
+//        }else if indexPath.row == 3 {
+//            cell.textLabel?.text = "로그인 정보"
+//        }
         
         return cell
     }
@@ -162,23 +209,47 @@ extension SettingViewController : UITableViewDelegate , UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.row == 0 {
             
-            guard let vc = self.storyboard?.instantiateViewController(withIdentifier: "LoginViewController") as? LoginViewController else { return }
+            if self.member_no == ""{
+                guard let vc = self.storyboard?.instantiateViewController(withIdentifier: "LoginViewController") as? LoginViewController else { return }
+                self.navigationController?.pushViewController(vc, animated: false)
+                
+            }else{
+                kakaoLogout()
+            }
             
-            self.navigationController?.pushViewController(vc, animated: false)
-            
-            
-        }else if indexPath.row == 1  {
-            kakaoTokenExistence()
-        }else if indexPath.row == 2 {
-            kakaoLogout()
-        }else if indexPath.row == 3 {
-//            kakaoLoginInfo()
-            NotificationCenter.default.post(
-                name: NSNotification.Name("kakaoLoginCheck")
-                , object: nil
-                , userInfo: nil)
         }
+//        else if indexPath.row == 1  {
+//            kakaoTokenExistence()
+//        }else if indexPath.row == 2 {
+//            kakaoLogout()
+//        }else if indexPath.row == 3 {
+////            kakaoLoginInfo()
+//            NotificationCenter.default.post(
+//                name: NSNotification.Name("kakaoLoginCheck")
+//                , object: nil
+//                , userInfo: nil)
+//        }
     }
 
 }
 
+extension UIViewController {
+
+func showToast(message : String, font: UIFont) {
+
+    let toastLabel = UILabel(frame: CGRect(x: self.view.frame.size.width/2 - 75, y: self.view.frame.size.height-100, width: 150, height: 35))
+    toastLabel.backgroundColor = UIColor.black.withAlphaComponent(0.6)
+    toastLabel.textColor = UIColor.white
+    toastLabel.font = font
+    toastLabel.textAlignment = .center;
+    toastLabel.text = message
+    toastLabel.alpha = 1.0
+    toastLabel.layer.cornerRadius = 10;
+    toastLabel.clipsToBounds  =  true
+    self.view.addSubview(toastLabel)
+    UIView.animate(withDuration: 2.0, delay: 0.1, options: .curveEaseOut, animations: {
+         toastLabel.alpha = 0.0
+    }, completion: {(isCompleted) in
+        toastLabel.removeFromSuperview()
+    })
+} }

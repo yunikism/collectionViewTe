@@ -118,7 +118,9 @@ class LoginViewController: UIViewController {
                             guard let apiInfo = json["data"] as? Dictionary<String,Any> else { return }
                             print("apiInfo : \(apiInfo)")
 
-                            let member_no = apiInfo["member_no"] as? String ?? ""
+                            let member_no = String(apiInfo["member_no"] as! Int)
+//                            guard let member_no1 = apiInfo["member_no"] as? String else{ }
+                            
                             let app_nm = apiInfo["app_nm"] as! String
                             let prf_pt_url = apiInfo["prf_pt_url"] as! String
                             let thni_pt_url = apiInfo["thni_pt_url"] as! String
@@ -139,9 +141,16 @@ class LoginViewController: UIViewController {
                                        ,id: id)
                             print("memberInfo : \(memberInfo)" )
                             
-                            UserDefaults.standard.set(memberInfo, forKey: "MemberInfo")
-
-//                        if apiInfo == nil { return }
+                            UserDefaults.standard.set(member_no, forKey: "member_no")
+                            
+                            NotificationCenter.default.post(
+                                name: NSNotification.Name("kakaoLoginSuccessToast")
+                                , object: nil
+                                , userInfo: nil)
+                            
+                            self.navigationController?.popViewController(animated: true)
+                            
+                            
 
                         } catch {
                             print("http body error")
